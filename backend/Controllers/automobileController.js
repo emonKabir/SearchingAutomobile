@@ -3,9 +3,17 @@ const Automobile = require("../Models/Automobile");
 
 exports.postAutomobileInfo = async function (req, res) {
   try {
-    console.log("req body ", req.body);
     req.body.image = "images/" + req.file.filename;
     const result = await Automobile.postAutomobileInfo(req.body);
+    res.send(result);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+exports.getAutomobileInfo = async function (req, res) {
+  try {
+    const result = await Automobile.getAutomobileInfo();
     res.send(result);
   } catch (error) {
     res.send(error);

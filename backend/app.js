@@ -7,7 +7,7 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/", require("./Routes/automobileRouter"));
+app.use("/automobile", require("./Routes/automobileRouter"));
 app.use(express.static(__dirname + "/public"));
 
 mongoose.connect(

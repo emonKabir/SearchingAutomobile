@@ -7,8 +7,18 @@ Automobile.postAutomobileInfo = function (object) {
     const automobileInfo = new AutomobileSchema(object);
     try {
       const savedAutomobileInfo = await automobileInfo.save();
-      console.log("jfkdjskl ", savedAutomobileInfo);
       resolve(savedAutomobileInfo);
+    } catch (error) {
+      reject({ message: error });
+    }
+  });
+};
+
+Automobile.getAutomobileInfo = function () {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const AutomobileInfo = await AutomobileSchema.find();
+      resolve(AutomobileInfo);
     } catch (error) {
       reject({ message: error });
     }
