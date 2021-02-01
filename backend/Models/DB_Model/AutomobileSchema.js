@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const autoMobileSchema = mongoose.Schema({
   title: String,
   brand: String,
-  image: String,
+  image_url: String,
   fuel_capacity: String,
   max_speed: String,
   details: String,

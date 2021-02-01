@@ -25,4 +25,19 @@ Automobile.getAutomobileInfo = function () {
   });
 };
 
+Automobile.updateAutomobileInfo = function (_id, updatableObject) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const automobileInfo = await AutomobileSchema.findByIdAndUpdate(
+        { _id },
+        updatableObject
+      );
+      console.log("testing update", automobileInfo);
+      resolve(automobileInfo);
+    } catch (error) {
+      reject({ message: error });
+    }
+  });
+};
+
 module.exports = Automobile;
