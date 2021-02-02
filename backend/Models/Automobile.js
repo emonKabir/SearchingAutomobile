@@ -25,6 +25,17 @@ Automobile.getAutomobileInfo = function () {
   });
 };
 
+Automobile.getSingleAutomobileInfo = function (_id) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const AutomobileInfo = await AutomobileSchema.findById({ _id });
+      resolve(AutomobileInfo);
+    } catch (error) {
+      reject({ message: error });
+    }
+  });
+};
+
 Automobile.updateAutomobileInfo = function (_id, updatableObject) {
   return new Promise(async (resolve, reject) => {
     try {

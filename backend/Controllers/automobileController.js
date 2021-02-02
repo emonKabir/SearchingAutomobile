@@ -21,6 +21,15 @@ exports.getAutomobileInfo = async function (req, res) {
   }
 };
 
+exports.getSingleAutomobileInfo = async function (req, res) {
+  try {
+    const result = await Automobile.getSingleAutomobileInfo(req.params.id);
+    res.send(result);
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 exports.updateAutomobileInfo = async function (req, res) {
   try {
     if (req.file) {

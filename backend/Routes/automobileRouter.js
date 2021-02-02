@@ -7,12 +7,15 @@ const {
   postAutomobileInfo,
   getAutomobileInfo,
   updateAutomobileInfo,
+  getSingleAutomobileInfo,
 } = require("../Controllers/automobileController");
 
 router.use(cors());
 
 router.post("/", upload.single("image"), postAutomobileInfo);
 router.get("/", getAutomobileInfo);
+router.get("/:id", getSingleAutomobileInfo);
 router.put("/:id", upload.single("image"), updateAutomobileInfo);
+//router.delete("/:id",  updateAutomobileInfo);
 
 module.exports = router;
