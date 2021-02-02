@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardBody } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { postCarsList } from "../services/carService";
+import { UpdateCarsList, getSingleCar } from "../services/carService";
 import Input from "../component/common/input";
 import TextArea from "../component/common/textarea";
 import InputFile from "./common/inputFile";
+
 const initValue = {
   title: "",
   brand: "",
@@ -19,7 +20,7 @@ function AddNewCar(props) {
     setValue((prevState) => ({ ...prevState, [name]: value }));
   };
   const handleValidation = () => {
-    if (!value.title || !value.brand || !value.image) {
+    if (!value.title || !value.brand) {
       toast.error("Field can't be empty");
       return false;
     }
@@ -32,7 +33,8 @@ function AddNewCar(props) {
     data.append("title", value.title);
     data.append("brand", value.brand);
     data.append("details", value.details);
-    data.append("image", value.image);
+    data.append("image_url", value.image_url);
+    if (typeof value.image === "object") data.append("image", value.image);
     return data;
   };
   const handleSubmit = async (e) => {
@@ -40,14 +42,25 @@ function AddNewCar(props) {
       e.preventDefault();
       if (!handleValidation()) return;
       const formData = handleFormData();
-      const status = await postCarsList(formData);
-
-      toast.success("New Car Added Successfully !");
+      const status = await UpdateCarsList(value._id, formData);
+      alert(status._id);
       props.history.push(`/single-car-details/${status._id}`);
     } catch (error) {
       toast.error(error);
     }
   };
+
+  async function getSingleCarDetils(id) {
+    try {
+      const carDetails = await getSingleCar(id);
+      setValue(carDetails);
+    } catch (error) {
+      toast.error("Something went wrong !");
+    }
+  }
+  useEffect(() => {
+    getSingleCarDetils(props.match.params.id);
+  }, [props.match.params.id]);
 
   return (
     <div className="container">
@@ -63,21 +76,22 @@ function AddNewCar(props) {
               name="title"
               label="Title"
               type="text"
-              value={value.title}
+              /* value={value.title} */
+              inputDefaultValue={value.title}
               onChange={handleChange}
             />
             <Input
               name="brand"
               label="Brand"
               type="text"
-              value={value.brand}
+              inputDefaultValue={value.brand}
               onChange={handleChange}
             />
 
             <TextArea
               name="details"
               label="Details"
-              value={value.details}
+              inputDefaultValue={value.details}
               onChange={handleChange}
             />
             <InputFile
@@ -92,7 +106,7 @@ function AddNewCar(props) {
                 type="submit"
                 className="form-group btn btn-primary mt-5 "
               >
-                Submit
+                Update
               </button>
             </div>
           </form>

@@ -17,7 +17,9 @@ function SingleCarDetails(props) {
     toggle();
   };
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    props.history.push(`/edit-car-details/${carDetails._id}`);
+  };
   const deleteContent = async () => {
     try {
       await deleteCarInfo(carDetails._id);

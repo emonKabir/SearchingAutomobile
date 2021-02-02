@@ -5,7 +5,7 @@ import { apiUrl } from "../config.json";
 import SearchBox from "./common/searchBox";
 import Table from "./common/table";
 import { getCarsList } from "../services/carService";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 const columns = [
   {
     label: "Image",
@@ -35,7 +35,7 @@ function Home(props) {
         <img
           src={apiUrl + row.image_url}
           className="align-self-end"
-          alt="car image"
+          alt="car"
           style={{ height: "100px" }}
         />
       );

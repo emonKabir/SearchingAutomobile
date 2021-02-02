@@ -39,9 +39,20 @@ export async function postCarsList(formData) {
   }
 }
 
+export async function UpdateCarsList(id, formData) {
+  try {
+    const { data } = await http.put(`${apiEndPoint}/${id}`, formData);
+    console.log("data ", data);
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
 export default {
   getSingleCar,
   getCarsList,
   postCarsList,
   deleteCarInfo,
+  UpdateCarsList,
 };

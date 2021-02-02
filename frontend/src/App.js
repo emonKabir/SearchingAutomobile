@@ -3,7 +3,8 @@ import { lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "./component/common/navbar";
 import Home from "./component/Home";
-import AddNewCar from "./component/AddNewCar";
+const AddNewCar = lazy(() => import("./component/AddNewCar"));
+const EditCarDetails = lazy(() => import("./component/EditCarDetails"));
 const SingleCarDetails = lazy(() => import("./component/SingleCarDetails"));
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
               path="/single-car-details/:id"
               component={SingleCarDetails}
             />
+            <Route path="/edit-car-details/:id" component={EditCarDetails} />
             <Route path="/add-new-car" component={AddNewCar} />
             <Route path="/" component={Home} />
           </Switch>

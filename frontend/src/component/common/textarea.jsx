@@ -4,7 +4,7 @@ function TextArea(props) {
   const [inputName] = useState(props.name);
   const [label] = useState(props.label);
   const [placeholder] = useState(props.placeHolder);
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useState(props.inputDefaultValue);
 
   function handleChange(event) {
     setValue(event.target.value);
@@ -15,6 +15,9 @@ function TextArea(props) {
     }
   }, [inputName, value]);
 
+  useEffect(() => {
+    setValue(props.inputDefaultValue);
+  }, [props.inputDefaultValue]);
   return (
     <div className="form-group row">
       <label htmlFor={inputName}>{label}</label>
