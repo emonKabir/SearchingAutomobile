@@ -21,6 +21,14 @@ export async function getSingleCar(id) {
   }
 }
 
+export async function deleteCarInfo(id) {
+  try {
+    const { data } = await http.delete(`${apiEndPoint}/${id}`);
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
 export async function postCarsList(formData) {
   try {
     const { data } = await http.post(apiEndPoint, formData);
@@ -35,4 +43,5 @@ export default {
   getSingleCar,
   getCarsList,
   postCarsList,
+  deleteCarInfo,
 };
