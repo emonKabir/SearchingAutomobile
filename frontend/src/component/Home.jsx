@@ -5,7 +5,7 @@ import { apiUrl } from "../config.json";
 import SearchBox from "./common/searchBox";
 import Table from "./common/table";
 import { getCarsList } from "../services/carService";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 const columns = [
   {
     label: "Image",
@@ -46,7 +46,9 @@ function Home(props) {
     return rows;
   };
 
-  const handleClick = (row) => alert(JSON.stringify(row));
+  const handleClick = (row) => {
+    props.history.push(`/single-car-details/${row._id}`);
+  };
   const handleSearchQueryChange = (value) => {
     setQuery(value);
 
@@ -74,9 +76,7 @@ function Home(props) {
   const getTableData = async () => {
     try {
       const carsList = await getCarsList();
-      console.log("car list ", carsList);
       const rows = addElement(carsList);
-      console.log("rows ", rows);
       setTableData((prevState) => ({ ...prevState, ["rows"]: rows }));
     } catch (error) {
       toast.error(error);
@@ -91,12 +91,9 @@ function Home(props) {
       <ToastContainer />
       <div className="row">
         <div className="col-12 d-flex justify-content-end">
-          <button
-            className="btn btn-primary  btn-md "
-            onClick={() => <Link to="/add-new-car" />}
-          >
-            Add Car
-          </button>
+          <Link to="/add-new-car">
+            <button className="btn btn-primary">Add New Car</button>
+          </Link>
         </div>
       </div>
       <SearchBox value={query} onChange={handleSearchQueryChange} />

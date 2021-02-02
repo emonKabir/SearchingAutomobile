@@ -12,6 +12,27 @@ export async function getCarsList() {
   }
 }
 
+export async function getSingleCar(id) {
+  try {
+    const { data } = await http.get(`${apiEndPoint}/${id}`);
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function postCarsList(formData) {
+  try {
+    const { data } = await http.post(apiEndPoint, formData);
+    console.log("data ", data);
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
 export default {
+  getSingleCar,
   getCarsList,
+  postCarsList,
 };
