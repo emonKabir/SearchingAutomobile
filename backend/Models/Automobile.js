@@ -36,6 +36,17 @@ Automobile.getSingleAutomobileInfo = function (_id) {
   });
 };
 
+Automobile.deleteAutomobile = function (_id) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const AutomobileInfo = await AutomobileSchema.findByIdAndDelete({ _id });
+      resolve(AutomobileInfo);
+    } catch (error) {
+      reject({ message: error });
+    }
+  });
+};
+
 Automobile.updateAutomobileInfo = function (_id, updatableObject) {
   return new Promise(async (resolve, reject) => {
     try {

@@ -8,6 +8,7 @@ const {
   getAutomobileInfo,
   updateAutomobileInfo,
   getSingleAutomobileInfo,
+  deleteAutomobile,
 } = require("../Controllers/automobileController");
 
 router.use(cors());
@@ -16,6 +17,6 @@ router.post("/", upload.single("image"), postAutomobileInfo);
 router.get("/", getAutomobileInfo);
 router.get("/:id", getSingleAutomobileInfo);
 router.put("/:id", upload.single("image"), updateAutomobileInfo);
-//router.delete("/:id",  updateAutomobileInfo);
+router.delete("/:id", deleteAutomobile);
 
 module.exports = router;

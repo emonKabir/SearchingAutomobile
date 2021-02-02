@@ -45,3 +45,12 @@ exports.updateAutomobileInfo = async function (req, res) {
     res.send(error);
   }
 };
+
+exports.deleteAutomobile = async function (req, res) {
+  try {
+    const result = await Automobile.deleteAutomobile(req.params.id);
+    res.send(result);
+  } catch (error) {
+    res.send(error);
+  }
+};
